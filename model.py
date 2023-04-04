@@ -32,17 +32,20 @@ def get_prediction(image_bytes):
     
     return imagenet_class_index[predicted_idx]
     
+@app.route('/mlapp/app', methods=['GET'])
+def hello():
+    if request.method == 'GET':
+        print("GET request received")
+        return "Hello World!"
 
-
-@app.route('/mlapp', methods=['POST'])
+@app.route('/mlapp/mlapp', methods=['POST'])
 def predict():
     if request.method == 'POST':
+        print("POST request received")
         file = request.files['image']
         img_bytes = file.read()
         
         class_id, class_name = get_prediction(image_bytes=img_bytes)
-
-        answer = class_name
         
         res = {
             'class_id' : class_id,
