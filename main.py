@@ -31,7 +31,13 @@ def get_prediction(image_bytes):
     predicted_idx = str(y_hat.item())
     
     return imagenet_class_index[predicted_idx]
-    
+
+@app.route('/', methods=['GET'])
+def hell():
+    if request.method == 'GET':
+        print("GET request received")
+        return "Hell World!"
+
 @app.route('/mlapp/app', methods=['GET'])
 def hello():
     if request.method == 'GET':
