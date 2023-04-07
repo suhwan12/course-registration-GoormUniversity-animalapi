@@ -2,8 +2,13 @@ FROM python:3.8
 ENV FLASK_APP=main
 COPY . /usr/src/main/
 WORKDIR /usr/src/main
-RUN python -m venv virtualenv
-RUN source virtualenv/bin/activate
+
+RUN python3 -m pip install --user -U virtualenv
+RUN echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
+RUN source ~/.bashrc
+RUN virtualenv venv
+
+RUN source venv/bin/activate
 
 RUN /usr/local/bin/python -m pip install --upgrade pip 
 RUN pip3 install --no-cache -r requirements.txt 
