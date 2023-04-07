@@ -4,11 +4,11 @@ COPY . /usr/src/main/
 WORKDIR /usr/src/main
 
 RUN python3 -m pip install --user -U virtualenv
-RUN echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
-RUN source ~/.bashrc
+RUN echo 'export PATH=$PATH:/usr/src/main/.local/bin' >> /usr/src/main/.bashrc
+RUN source /usr/src/main/.bashrc
 RUN virtualenv venv
 
-RUN source venv/bin/activate
+RUN source /usr/src/main/venv/bin/activate
 
 RUN /usr/local/bin/python -m pip install --upgrade pip 
 RUN pip3 install --no-cache -r requirements.txt 
